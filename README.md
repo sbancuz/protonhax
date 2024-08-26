@@ -25,7 +25,7 @@ NOTE: The PATH variable is ignored
 `protonhax exec <appid> <path/to/program> [args...]`\
 NOTE: The PATH variable is ignored
 
-## Installing
+## Installation
 
 **protonhax** is currently a single bash script, you just need to add it to your $PATH. 
 
@@ -38,14 +38,53 @@ NOTE: The PATH variable is ignored
 - https://aur.archlinux.org/packages/protonhax
 - https://aur.archlinux.org/packages/protonhax-git/
 
-## Debugging
+## Debug and Troubleshoot
+
+### Enable *protonhax* log
 
 Open the `protonhax` file and add to the second line
 ```sh
 set -x
 exec >/tmp/protonhax.$$.log 2>&1
 ```
-It will save protonhax debug log into `/tmp/protonhax.*.log`
+It will save *protonhax* debug log into `/tmp/protonhax.*.log`
+
+### $PATH
+
+Make sure *protonhax* is in your $PATH.
+
+Open a terminal and run `protonhax`, if you do not see instructions, go back to the installation process.
+
+If your game does not start, make sure Steam can see and access your **$PATH**. 
+
+Depending on how you install and execute Steam, Steam will only have access to a few locations. Like using **distrobox** or **flatpak**. Please check the issues page for `flatpak` workaround.
+
+If your Steam is host installed,  starting  Steam from a terminal will make sure it can see your $PATH
+
+### Steam
+
+You can check Steam's log - location will vary depending on how you installed it (check their docs). Or start Steam from a terminal and look for the messages.
+
+When you run *protonhax*, e.g. `protonhax cmd 12345*, you should see in the logs :
+
+```
+Adding process 44444 for gameID 12345
+Adding process 44445 for gameID 12345
+```
+
+The process number will vary, and gameID will match to your game.
+
+### Proper file path - CMD
+
+You might be having indications that `protonhax` cannot find the program you are trying to execute. That can be an issue with file path solving. 
+
+Try to run `protonhax cmd 12345`to confirm if it works.
+
+If it works, you might want to try to store your program in a path with no spaces and special characters, and pass the full path to `protonhax` to make sure.
+
+### Issues page.
+
+You can check the issue pages for similar problems, and don't be shy to open one in case you need help troubleshooting. It always helps to make *protonhax* better.
 
 ## Contributing
 Contributions are always welcome! Especially if they are packages for other distributions.
@@ -62,3 +101,4 @@ Protonhax is not necessary, you can set your launch options to switch paths. Exa
 - [ ] Flatpak version for Steam Flatpak
 - [ ] Nix Packages
 - [ ] Packages for other Linux distributions.
+- [ ] New repo for *protonhax* GUI
